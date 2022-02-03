@@ -1,4 +1,5 @@
 import pytest
+
 from pywgkey import __version__
 from pywgkey.utils import generate_keys_until_string_is_found
 
