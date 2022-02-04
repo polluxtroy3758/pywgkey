@@ -5,7 +5,7 @@ from pywgkey.utils import generate_keys_until_string_is_found
 
 
 def test_version():
-    assert __version__ == "0.1.0"
+    assert __version__ == "0.1.1"
 
 
 def test_WgKey():

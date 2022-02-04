@@ -1,20 +1,27 @@
 [tool.poetry]
 name = "pywgkey"
-version = "0.1.0"
+version = "0.1.1"
 description = "A simple WireGuard key generator writen in python."
 authors = ["polluxtroy3758 <2147396+polluxtroy3758@users.noreply.github.com>"]
 license = "MIT"
 readme = "README.md"
 repository = "https://github.com/polluxtroy3758/pywgkey"
 classifiers = [
+    "Programming Language :: Python",
     "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3 :: Only",
     "Programming Language :: Python :: 3.7",
     "Programming Language :: Python :: 3.8",
     "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
     "License :: OSI Approved :: MIT License",
     "Operating System :: OS Independent",
     "Topic :: Security",
+    "Topic :: Security :: Cryptography",
     "Topic :: Utilities",
+    "Topic :: Software Development",
+    "Topic :: Software Development :: Libraries",
+    "Topic :: Software Development :: Libraries :: Python Modules"
 ]
 
 [tool.poetry.dependencies]
