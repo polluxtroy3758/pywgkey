@@ -32,3 +32,9 @@ def test_string_tool_long():
     wanted_string = "abcdef"
     with pytest.raises(ValueError):
         generate_keys_until_string_is_found(wanted_string)
+
+
+def test_empty_string():
+    wanted_string = ""
+    with pytest.raises(ValueError):
+        generate_keys_until_string_is_found(wanted_string)

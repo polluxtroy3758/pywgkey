@@ -8,7 +8,7 @@ from nacl.public import PrivateKey as _PrivateKey
 class WgKey:
     """Wireguard key pair"""
 
-    def __init__(self) -> None:
+    def __init__(self):
         self._key = _PrivateKey.generate()
         self._name = None
 
@@ -41,7 +41,7 @@ class WgKey:
 class WgPsk:
     """Wireguard preshared key"""
 
-    def __init__(self, name: str = None) -> None:
+    def __init__(self, name: str = None):
         self._key = _PrivateKey.generate()
         self._name = name
 

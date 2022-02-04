@@ -7,16 +7,16 @@ from .config import BASE64_ALPHABET, MAX_LENGTH
 from .key import WgKey, WgPsk
 
 
-def validate_string(wanted_string: str = None) -> None:
+def validate_string(wanted_string: str):
     """Validate a given string
 
     If the given string is composed of valid base 64 characters AND it's length
     is no more than MAX_LENGTH, then it is valid.
 
-    :param str string: the string to validate as valid b64 characters
+    :param str wanted_string: the string to validate as valid b64 characters
     :raises ValueError: if string is not valid
     """
-    if wanted_string is None:
+    if wanted_string == "":
         raise ValueError("The string is empty.")
     if len(wanted_string) > MAX_LENGTH:
         raise ValueError(f"'{wanted_string}' is longer than {MAX_LENGTH} characters.")
@@ -25,10 +25,10 @@ def validate_string(wanted_string: str = None) -> None:
             raise ValueError("The string must only contain base 64 alphabet.")
 
 
-def __string_is_found(string: str, key: WgKey, startswith: bool = False) -> bool:
+def __string_is_found(wanted_string: str, key: WgKey, startswith: bool = False) -> bool:
     """Search for a given string in the public key of a WireGuard key pair
 
-    :param str string: the string to search for
+    :param str wanted_string: the string to search for
     :param WgKey key: a WireGuard key pair
     :param str startswith: set to True if the pubkey must start with the string
     (default: 'False')
@@ -38,10 +38,10 @@ def __string_is_found(string: str, key: WgKey, startswith: bool = False) -> bool
     found = False
 
     if startswith:
-        if key.pubkey.lower().startswith(string):
+        if key.pubkey.lower().startswith(wanted_string):
             found = True
     else:
-        if string.lower() in key.pubkey.lower():
+        if wanted_string.lower() in key.pubkey.lower():
             found = True
 
     return found
@@ -52,7 +52,7 @@ def generate_keys_until_string_is_found(
 ) -> WgKey:
     """Generates keys until string is found at desired place in a pubkey
 
-    :param string: string to search
+    :param wanted_string: string to search
     :param startswith: if the key must start with the string
     :return: the matching key
     :rtype: WgKey
@@ -106,7 +106,7 @@ def __can_write_file(filename: str) -> bool:
             raise IOError(f"'{filename}' current directory is not writable.")
 
 
-def __set_file_permissions(filename: str) -> None:
+def __set_file_permissions(filename: str):
     """Set files permissions
 
     The files persmissions are set read/write for owner.
@@ -120,7 +120,7 @@ def __set_file_permissions(filename: str) -> None:
         pass  # TODO: manage windows permissions
 
 
-def write_key_to_file(key: WgKey, psk: WgPsk = None) -> None:
+def write_key_to_file(key: WgKey, psk: WgPsk = None):
     """Writes the public and private key to separate files
 
     The public key will be saved as 'keyname.pub'.
@@ -152,7 +152,7 @@ def write_key_to_file(key: WgKey, psk: WgPsk = None) -> None:
             print(f"{key_type} key have been writen to {file}")
 
 
-def print_keys(key: WgKey, psk: WgPsk = None) -> None:
+def print_keys(key: WgKey, psk: WgPsk = None):
     """Prints the keys to stdout
 
     :param WgKey key: The keypair to print
