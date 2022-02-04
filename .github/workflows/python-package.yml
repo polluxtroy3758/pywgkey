@@ -29,11 +29,15 @@ jobs:
         python -m pip install --upgrade pip
         python -m pip install poetry
         poetry install
+    - name: Sort imports with isort
+      run: |
+        poetry run isort pywgkey --check-only --diff
+    - name: Format with black --check
+      run: |
+        poetry run black pywgkey --check
     - name: Lint with flake8
       run: |
-        poetry run isort pywgkey
-        poetry run black pywgkey
-        poetry run flake8 pywgkey --count --show-source --statistics
+        poetry run flake8 pywgkey
     - name: Test with pytest
       run: |
         poetry run pytest
