@@ -5,13 +5,12 @@ name: Python package
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
   pull_request:
-    branches: [ main ]
+    branches: [main]
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
@@ -19,25 +18,25 @@ jobs:
         python-version: ["3.7", "3.8", "3.9", "3.10"]
 
     steps:
-    - uses: actions/checkout@v2
-    - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v2
-      with:
-        python-version: ${{ matrix.python-version }}
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        python -m pip install poetry
-        poetry install
-    - name: Sort imports with isort
-      run: |
-        poetry run isort pywgkey --check-only --diff
-    - name: Format with black --check
-      run: |
-        poetry run black pywgkey --check
-    - name: Lint with flake8
-      run: |
-        poetry run flake8 pywgkey
-    - name: Test with pytest
-      run: |
-        poetry run pytest
+      - uses: actions/checkout@v2
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install poetry
+          poetry install
+      - name: Sort imports with isort
+        run: |
+          poetry run isort pywgkey --check-only --diff
+      - name: Format with black
+        run: |
+          poetry run black pywgkey --check
+      - name: Lint with flake8
+        run: |
+          poetry run flake8 pywgkey
+      - name: Test with pytest
+        run: |
+          poetry run pytest
