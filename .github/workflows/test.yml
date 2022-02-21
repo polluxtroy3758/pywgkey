@@ -3,8 +3,18 @@ name: Test
 on:
   push:
     branches: [main]
+    paths-ignore:
+      - "README.md"
+      - ".vscode/**"
+      - "CHANGELOG.md"
+      - "LICENSE"
   pull_request:
     branches: [main]
+    paths-ignore:
+      - "README.md"
+      - ".vscode/**"
+      - "CHANGELOG.md"
+      - "LICENSE"
 
 jobs:
   build:
