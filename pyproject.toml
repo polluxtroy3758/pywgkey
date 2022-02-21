@@ -5,6 +5,7 @@ description = "A simple WireGuard key generator writen in python."
 authors = ["polluxtroy3758 <2147396+polluxtroy3758@users.noreply.github.com>"]
 license = "MIT"
 readme = "README.md"
+include = ["/tests/*", "CHANGELOG.md"]
 repository = "https://github.com/polluxtroy3758/pywgkey"
 classifiers = [
     "Programming Language :: Python",
@@ -29,18 +30,28 @@ python = "^3.7"
 PyNaCl = "^1.5.0"
 
 [tool.poetry.dev-dependencies]
-pytest = ">=5.2"
+pytest = "^7.0.1"
 flake8 = "^4.0.1"
 black = "^22.1.0"
 pre-commit = "^2.17.0"
 isort = "^5.10.1"
+python-semantic-release = "^7.25.0"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
 
-[tool.black]
-line-length = 88
-
 [tool.isort]
 profile = "black"
+
+[tool.semantic_release]
+version_variable = [
+    "pywgkey/__init__.py:__version__",
+    "pyproject.toml:tool.poetry.version"
+]
+branch = "main"
+changelog_file = "CHANGELOG.md"
+build_command = "poetry install && poetry build"
+dist_path = "dist/"
+upload_to_pypi = false
+remove_dist = false
