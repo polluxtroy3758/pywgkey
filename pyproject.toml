@@ -5,7 +5,7 @@ description = "A simple WireGuard key generator writen in python."
 authors = ["polluxtroy3758 <2147396+polluxtroy3758@users.noreply.github.com>"]
 license = "MIT"
 readme = "README.md"
-include = ["/tests/*", "CHANGELOG.md"]
+include = ["tests/*", "CHANGELOG.md"]
 repository = "https://github.com/polluxtroy3758/pywgkey"
 classifiers = [
     "Programming Language :: Python",
