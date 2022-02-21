@@ -1,4 +1,4 @@
-![GitHub Workflow Status](https://img.shields.io/github/workflow/status/polluxtroy3758/pywgkey/Python%20package?style=flat-square) ![GitHub release (latest by date including pre-releases)](https://img.shields.io/github/v/release/polluxtroy3758/pywgkey?include_prereleases&style=flat-square)
+![GitHub Workflow Status](https://img.shields.io/github/workflow/status/polluxtroy3758/pywgkey/Test?style=flat-square) ![GitHub release (latest by date including pre-releases)](https://img.shields.io/github/v/release/polluxtroy3758/pywgkey?include_prereleases&style=flat-square)
 
 # PyWgKey
 
