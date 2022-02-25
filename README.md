@@ -1,4 +1,4 @@
-![GitHub Workflow Status](https://img.shields.io/github/workflow/status/polluxtroy3758/pywgkey/Test?style=flat-square) ![GitHub release (latest by date including pre-releases)](https://img.shields.io/github/v/release/polluxtroy3758/pywgkey?include_prereleases&style=flat-square)
+[![CI](https://github.com/polluxtroy3758/pywgkey/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/polluxtroy3758/pywgkey/actions/workflows/ci.yml) [![CD](https://github.com/polluxtroy3758/pywgkey/actions/workflows/cd.yml/badge.svg)](https://github.com/polluxtroy3758/pywgkey/actions/workflows/cd.yml) [![codecov](https://codecov.io/gh/polluxtroy3758/pywgkey/branch/main/graph/badge.svg?token=Y6Y7A1DP0B)](https://codecov.io/gh/polluxtroy3758/pywgkey) ![PyPI](https://img.shields.io/pypi/v/pywgkey)
 
 # PyWgKey
 
