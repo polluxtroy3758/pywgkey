@@ -1,3 +1,4 @@
+import os
 import pathlib
 
 import pytest
@@ -47,27 +48,36 @@ def test_WgPsk():
     assert str(key) == key.key
 
 
-def test_write_key_to_file():
+def test_write_key_to_file(tmpdir):
+    os.chdir(tmpdir)
+
     key = WgKey()
     key.name = "testkey"
     psk = WgPsk(key.name)
-    privkey_path = pathlib.Path(f"{key.name}.priv")
-    pubkey_path = pathlib.Path(f"{key.name}.pub")
-    psk_path = pathlib.Path(f"{key.name}.psk")
+
+    temp_dir = pathlib.Path(tmpdir)
+
+    privkey_path = temp_dir.joinpath(f"{key.name}.priv")
+    pubkey_path = temp_dir.joinpath(f"{key.name}.pub")
+    psk_path = temp_dir.joinpath(f"{key.name}.psk")
+
     write_key_to_file(key, psk)
 
     # Private key file
-    assert privkey_path.exists()
+    assert privkey_path.is_file()
+    assert oct(privkey_path.stat().st_mode).endswith("600")
     assert privkey_path.read_text() == key.privkey
 
     # Public key file
-    assert pubkey_path.exists()
+    assert pubkey_path.is_file()
+    assert oct(pubkey_path.stat().st_mode).endswith("600")
     assert pubkey_path.read_text() == key.pubkey
 
     # Preshared key file
-    assert psk_path.exists()
+    assert psk_path.is_file()
+    assert oct(psk_path.stat().st_mode).endswith("600")
     assert psk_path.read_text() == psk.key
 
-    privkey_path.unlink()
-    pubkey_path.unlink()
-    psk_path.unlink()
+
+def test_main():
+    ...
