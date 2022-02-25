@@ -1,4 +1,4 @@
-name: Test
+name: CI
 
 on:
   push:
@@ -17,7 +17,7 @@ on:
       - "LICENSE"
 
 jobs:
-  build:
+  ci:
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
