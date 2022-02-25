@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "pywgkey"
-version = "0.1.1"
+version = "0.2.1"
 description = "A simple WireGuard key generator writen in python."
 authors = ["polluxtroy3758 <2147396+polluxtroy3758@users.noreply.github.com>"]
 license = "MIT"
@@ -48,7 +48,7 @@ profile = "black"
 [tool.semantic_release]
 version_variable = [
     "pywgkey/__init__.py:__version__",
-    "pyproject.toml:tool.poetry.version"
+    "pyproject.toml:version"
 ]
 branch = "main"
 changelog_file = "CHANGELOG.md"
