@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 
 import os
+import pathlib
 
 from .config import BASE64_ALPHABET, MAX_LENGTH
 from .key import WgKey, WgPsk
@@ -85,9 +86,11 @@ def __can_write_file(filename: str) -> bool:
     :rtype: bool
     :raises IOError: cannot write file
     """
-    if os.path.exists(filename):
-        if os.path.isfile(filename):
-            if os.access(filename, os.W_OK):
+    file_path = pathlib.Path(filename)
+
+    if file_path.exists():
+        if file_path.is_file():
+            if os.access(file_path, os.W_OK):
                 # The file exists and is writable
                 return __prompt_overwrite(filename)
             else:
@@ -97,13 +100,10 @@ def __can_write_file(filename: str) -> bool:
             raise IOError(f"'{filename}' is a directory.")
     else:
         # The file does not exists, check parent dir permissions
-        parent_dir = os.path.dirname(filename)
-        if not parent_dir:
-            parent_dir = "."
-        if os.access(parent_dir, os.W_OK):
+        if os.access(file_path.parent, os.W_OK):
             return True
         else:
-            raise IOError(f"'{filename}' current directory is not writable.")
+            raise IOError(f"'{file_path.parent}' directory is not writable.")
 
 
 def __set_file_permissions(filename: str):
