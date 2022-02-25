@@ -28,7 +28,7 @@ def test_invalid_alphabet():
         generate_keys_until_string_is_found(wanted_string)
 
 
-def test_string_tool_long():
+def test_string_too_long():
     wanted_string = "abcdef"
     with pytest.raises(ValueError):
         generate_keys_until_string_is_found(wanted_string)
