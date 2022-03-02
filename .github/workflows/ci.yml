@@ -37,16 +37,16 @@ jobs:
 
       - name: Format with black
         run: |
-          poetry run black pywgkey --check
+          poetry run black src tests --check
 
       - name: Lint with flake8
         run: |
-          poetry run flake8 pywgkey
+          poetry run flake8 src tests
 
       - name: Test with pytest
         run: |
-          poetry run pytest tests/ --cov=pywgkey --cov-report=xml
-      
+          poetry run pytest --cov-report=xml
+
       - uses: codecov/codecov-action@v2
         with:
           files: ./coverage.xml
