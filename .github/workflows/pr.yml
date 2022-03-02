@@ -1,4 +1,4 @@
-name: CI
+name: Test PR
 
 on:
   pull_request:
@@ -45,7 +45,3 @@ jobs:
       - name: Test with pytest
         run: |
           poetry run pytest tests/ --cov=pywgkey --cov-report=xml
-      
-      - uses: codecov/codecov-action@v2
-        with:
-          files: ./coverage.xml
