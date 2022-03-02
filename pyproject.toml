@@ -47,7 +47,7 @@ profile = "black"
 
 [tool.semantic_release]
 version_variable = [
-    "pywgkey/__init__.py:__version__",
+    "src/pywgkey/__init__.py:__version__",
     "pyproject.toml:version"
 ]
 branch = "main"
