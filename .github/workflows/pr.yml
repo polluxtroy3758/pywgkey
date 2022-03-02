@@ -32,16 +32,16 @@ jobs:
 
       - name: Sort imports with isort
         run: |
-          poetry run isort pywgkey --check-only --diff
+          poetry run isort pywgkey tests --check-only --diff
 
       - name: Format with black
         run: |
-          poetry run black pywgkey --check
+          poetry run black src tests --check
 
       - name: Lint with flake8
         run: |
-          poetry run flake8 pywgkey
+          poetry run flake8 src tests
 
       - name: Test with pytest
         run: |
-          poetry run pytest tests/ --cov=pywgkey --cov-report=xml
+          poetry run pytest
