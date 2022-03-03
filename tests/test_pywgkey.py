@@ -77,7 +77,3 @@ def test_write_key_to_file(tmpdir):
     assert psk_path.is_file()
     assert oct(psk_path.stat().st_mode).endswith("600")
     assert psk_path.read_text() == psk.key
-
-
-def test_main():
-    ...
