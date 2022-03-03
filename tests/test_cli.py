@@ -54,3 +54,43 @@ def test_cli_write(tmpdir):
     assert pathlib.Path("a.pub").exists()
     assert pathlib.Path("a.priv").exists()
     assert pathlib.Path("a.psk").exists()
+
+
+@pytest.mark.parametrize("answer, exit_code", [("y", 0), ("n", 0), ("", 1), ("a", 1)])
+def test_cli_overwrite_files(tmpdir, answer, exit_code):
+    os.chdir(tmpdir)
+    pubkey_file = pathlib.Path("a.pub")
+    pubkey_file.touch()
+
+    runner = CliRunner()
+    result = runner.invoke(main, ["-w", "-p", "a"], input=answer)
+    assert result.exit_code == exit_code
+
+
+def test_cli_file_not_writable(tmpdir):
+    os.chdir(tmpdir)
+    pubkey_file = pathlib.Path("a.pub")
+    pubkey_file.touch(0o100)
+
+    runner = CliRunner()
+    result = runner.invoke(main, ["-w", "a"])
+    assert result.exception
+
+
+def test_cli_file_is_directory(tmpdir):
+    os.chdir(tmpdir)
+    pubkey_file = pathlib.Path("a.pub")
+    pubkey_file.mkdir()
+
+    runner = CliRunner()
+    result = runner.invoke(main, ["-w", "a"])
+    assert result.exception
+
+
+def test_cli_file_parent_not_writeable(tmpdir):
+    os.chdir(tmpdir)
+    pathlib.Path().cwd().chmod(0o100)
+
+    runner = CliRunner()
+    result = runner.invoke(main, ["-w", "a"])
+    assert result.exception
