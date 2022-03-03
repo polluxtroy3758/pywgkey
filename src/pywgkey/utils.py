@@ -3,6 +3,7 @@
 
 import os
 import pathlib
+from typing import Union
 
 from .config import BASE64_ALPHABET, MAX_LENGTH
 from .key import WgKey, WgPsk
@@ -120,7 +121,7 @@ def __set_file_permissions(filename: str):
         pass  # TODO: manage windows permissions
 
 
-def write_key_to_file(key: WgKey, psk: WgPsk = None):
+def write_key_to_file(key: WgKey, psk: Union[WgPsk, None] = None):
     """Writes the public and private key to separate files
 
     The public key will be saved as 'keyname.pub'.
@@ -149,10 +150,10 @@ def write_key_to_file(key: WgKey, psk: WgPsk = None):
                     print(psk.key)
 
             __set_file_permissions(file)
-            print(f"{key_type} key have been writen to {file}")
+            print(f"{key_type} key have been writen to {file}\n")
 
 
-def print_keys(key: WgKey, psk: WgPsk = None):
+def print_keys(key: WgKey, psk: Union[WgPsk, None] = None):
     """Prints the keys to stdout
 
     :param WgKey key: The keypair to print
