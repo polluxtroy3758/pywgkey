@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "pywgkey"
-version = "0.2.2"
+version = "1.0.0"
 description = "A simple WireGuard key generator writen in python."
 authors = ["polluxtroy3758 <2147396+polluxtroy3758@users.noreply.github.com>"]
 license = "MIT"
