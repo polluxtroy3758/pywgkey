@@ -29,5 +29,5 @@ def main(wanted_string: str, begining: bool, write: bool, psk: bool):
         print_keys(key, pre_shared_key)
 
 
-if __name__ == "__main__":
+if __name__ == "__main__":  # pragma: no cover
     main()
