@@ -41,7 +41,7 @@ class WgKey:
 class WgPsk:
     """Wireguard preshared key"""
 
-    def __init__(self, name: str = None):
+    def __init__(self, name: str):
         self._key = _PrivateKey.generate()
         self._name = name
 

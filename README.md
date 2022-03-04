@@ -12,25 +12,22 @@ pip install pywgkey
 
 ## Usage
 
-```
-$ python -m pywgkey -h
-usage: python -m pywgkey [-h] [-b] [-w] [-p] string
+```console
+$ python3 -m pywgkey --help
+Usage: python -m pywgkey [OPTIONS] WANTED_STRING
 
-Generate wg keypair containing specified string
+  Generate WireGuard keypair containing specified wanted string.
 
-positional arguments:
-  string          The string that must be found in the pubkey
-
-optional arguments:
-  -h, --help      show this help message and exit
-  -b, --begining  If the pubkey must start with the string (default: False)
-  -w, --write     Write keys to files
-  -p, --psk       Genarate a preshared key as well
+Options:
+  -b, --begining  If the pubkey must start with the string.
+  -w, --write     Write keys to files.
+  -p, --psk       Genarate a preshared key as well.
+  --help          Show this message and exit.
 ```
 
 ### Generate and print a keypair containing a string
 
-```
+```console
 $ python -m pywgkey test
 Your public key is:  1f810nNMhOB8mYpGbEvDwmXTeStPMycLiHpw0/CeL1c=
 Your private key is: 75C5ahPr5UY3paWXvLRKd82EK7KWuDDJ0D9h7/p21Us=
@@ -38,7 +35,7 @@ Your private key is: 75C5ahPr5UY3paWXvLRKd82EK7KWuDDJ0D9h7/p21Us=
 
 ### Generate and write the keys to the current folder
 
-```
+```console
 $ python -m pywgkey test -w
 Keys have been writen to test.pub and test.priv
 $ cat test.pub
@@ -49,7 +46,7 @@ $ cat test.priv
 
 ### If you want the public key to **start** with a string (case is ignored)
 
-```
+```console
 $ python -m pywgkey test -b
 Your public key is:  TEsTtKLgqud0Yohg8geFKcnGy99xFzZlMvSv2YbwT1Y=
 Your private key is: paknyfh/d0LhZP2LqtjzJs2UE6XwaN14irxFdLV6d94=
