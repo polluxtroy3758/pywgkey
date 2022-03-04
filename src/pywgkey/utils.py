@@ -137,7 +137,7 @@ def write_key_to_file(key: WgKey, psk: Union[WgPsk, None] = None):
     """Writes the public and private key to separate files
 
     The public key will be saved as `<key.name>.pub`.
-    The private key will be saved as <key.name>.priv`.
+    The private key will be saved as `<key.name>.priv`.
     The preshared key (if any) will be saved as `<key.name>.psk`.
 
     :param WgKey key: the keypair to save
