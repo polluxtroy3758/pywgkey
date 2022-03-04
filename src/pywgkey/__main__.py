@@ -10,12 +10,12 @@ from .utils import generate_keys_until_string_is_found, print_keys, write_key_to
 @click.command()
 @click.argument("wanted_string", type=str, required=True)
 @click.option(
-    "-b", "--begining", is_flag=True, help="If the pubkey must start with the string"
+    "-b", "--begining", is_flag=True, help="If the pubkey must start with the string."
 )
-@click.option("-w", "--write", is_flag=True, help="Write keys to files")
-@click.option("-p", "--psk", is_flag=True, help="Genarate a preshared key as well")
+@click.option("-w", "--write", is_flag=True, help="Write keys to files.")
+@click.option("-p", "--psk", is_flag=True, help="Genarate a preshared key as well.")
 def main(wanted_string: str, begining: bool, write: bool, psk: bool):
-    """Generate WireGuard keypair containing specified wanted string"""
+    """Generate WireGuard keypair containing specified wanted string."""
 
     key = generate_keys_until_string_is_found(wanted_string, begining)
 
