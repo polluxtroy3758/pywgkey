@@ -4,13 +4,13 @@ import pathlib
 import pytest
 from click.testing import CliRunner
 
-from pywgkey.__main__ import main
+from pywgkey.__main__ import cli
 
 
-@pytest.mark.parametrize("wanted_string, exit_code", [("a", 0), ("b", 0), (None, 2)])
+@pytest.mark.parametrize("wanted_string, exit_code", [("a", 0), ("b", 0), (None, 1)])
 def test_cli(wanted_string: str, exit_code: int):
     runner = CliRunner()
-    result = runner.invoke(main, wanted_string)
+    result = runner.invoke(cli, ["full", wanted_string])
     assert result.exit_code == exit_code
 
     if result.exit_code == 0:
@@ -26,7 +26,7 @@ def test_cli(wanted_string: str, exit_code: int):
 @pytest.mark.parametrize("wanted_string", ["a", "b"])
 def test_cli_begining(wanted_string: str):
     runner = CliRunner()
-    result = runner.invoke(main, ["-b", wanted_string])
+    result = runner.invoke(cli, ["full", "-b", wanted_string])
     assert result.exit_code == 0
 
     out_lines = result.output.split("\n")
@@ -37,7 +37,7 @@ def test_cli_begining(wanted_string: str):
 
 def test_cli_psk():
     runner = CliRunner()
-    result = runner.invoke(main, ["-p", "a"])
+    result = runner.invoke(cli, ["full", "-p", "a"])
     assert result.exit_code == 0
 
     out_lines = result.output.split("\n")
@@ -48,7 +48,7 @@ def test_cli_write(tmpdir):
     os.chdir(tmpdir)
 
     runner = CliRunner()
-    result = runner.invoke(main, ["-w", "-p", "a"])
+    result = runner.invoke(cli, ["full", "-w", "-p", "a"])
     assert result.exit_code == 0
 
     assert pathlib.Path("a.pub").exists()
@@ -63,7 +63,7 @@ def test_cli_overwrite_files(tmpdir, answer, exit_code):
     pubkey_file.touch()
 
     runner = CliRunner()
-    result = runner.invoke(main, ["-w", "-p", "a"], input=answer)
+    result = runner.invoke(cli, ["full", "-w", "-p", "a"], input=answer)
     assert result.exit_code == exit_code
 
 
@@ -73,7 +73,7 @@ def test_cli_file_not_writable(tmpdir):
     pubkey_file.touch(0o100)
 
     runner = CliRunner()
-    result = runner.invoke(main, ["-w", "a"])
+    result = runner.invoke(cli, ["full", "-w", "a"])
     assert result.exception
 
 
@@ -83,7 +83,7 @@ def test_cli_file_is_directory(tmpdir):
     pubkey_file.mkdir()
 
     runner = CliRunner()
-    result = runner.invoke(main, ["-w", "a"])
+    result = runner.invoke(cli, ["full", "-w", "a"])
     assert result.exception
 
 
@@ -92,5 +92,5 @@ def test_cli_file_parent_not_writeable(tmpdir):
     pathlib.Path().cwd().chmod(0o100)
 
     runner = CliRunner()
-    result = runner.invoke(main, ["-w", "a"])
+    result = runner.invoke(cli, ["full", "-w", "a"])
     assert result.exception

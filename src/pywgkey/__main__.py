@@ -4,7 +4,12 @@
 import click
 
 from .key import WgPsk
-from .utils import generate_keys_until_string_is_found, print_keys, write_key_to_file
+from .utils import (
+    generate_keys_until_string_is_found,
+    generate_public_key_from_private_key,
+    print_keys,
+    write_key_to_file,
+)
 
 
 @click.command()
@@ -14,7 +19,7 @@ from .utils import generate_keys_until_string_is_found, print_keys, write_key_to
 )
 @click.option("-w", "--write", is_flag=True, help="Write keys to files.")
 @click.option("-p", "--psk", is_flag=True, help="Genarate a preshared key as well.")
-def main(wanted_string: str, begining: bool, write: bool, psk: bool):
+def full(wanted_string: str, begining: bool, write: bool, psk: bool):
     """Generate WireGuard keypair containing specified wanted string."""
 
     key = generate_keys_until_string_is_found(wanted_string, begining)
@@ -29,5 +34,23 @@ def main(wanted_string: str, begining: bool, write: bool, psk: bool):
         print_keys(key, pre_shared_key)
 
 
+@click.command()
+@click.argument("private_key", type=str, required=True)
+def pub(private_key):
+    """Retrieve public key from a private key."""
+    key = generate_public_key_from_private_key(private_key)
+    print_keys(key)
+
+
+@click.group()
+def cli():
+    """Wireguard key generation tool."""
+    pass
+
+
+cli.add_command(full)
+cli.add_command(pub)
+
+
 if __name__ == "__main__":  # pragma: no cover
-    main()
+    cli()

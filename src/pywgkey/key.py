@@ -1,6 +1,9 @@
 """Main classes used in the module"""
 
-from base64 import b64encode
+import binascii
+import sys
+from base64 import b64decode, b64encode
+from typing import Optional
 
 from nacl.public import PrivateKey as _PrivateKey
 
@@ -8,8 +11,15 @@ from nacl.public import PrivateKey as _PrivateKey
 class WgKey:
     """Wireguard key pair"""
 
-    def __init__(self):
-        self._key = _PrivateKey.generate()
+    def __init__(self, private_key: Optional[str] = None):
+        if private_key is not None:
+            try:
+                self._key = _PrivateKey(b64decode(private_key))
+            except binascii.Error:
+                print("Invalid private key. Aborting...")
+                sys.exit(1)
+        else:
+            self._key = _PrivateKey.generate()
         self._name = None
 
     def __str__(self) -> str:
