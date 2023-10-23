@@ -1,8 +1,8 @@
 """Main classes used in the module"""
 
-from base64 import b64encode, b64decode
 import binascii
 import sys
+from base64 import b64decode, b64encode
 
 from nacl.public import PrivateKey as _PrivateKey
 
