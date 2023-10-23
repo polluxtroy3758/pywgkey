@@ -3,6 +3,7 @@
 import binascii
 import sys
 from base64 import b64decode, b64encode
+from typing import Optional
 
 from nacl.public import PrivateKey as _PrivateKey
 
@@ -10,7 +11,7 @@ from nacl.public import PrivateKey as _PrivateKey
 class WgKey:
     """Wireguard key pair"""
 
-    def __init__(self, private_key: str | None = None):
+    def __init__(self, private_key: Optional[str] = None):
         if private_key is not None:
             try:
                 self._key = _PrivateKey(b64decode(private_key))
