@@ -19,9 +19,7 @@ from .utils import (
 )
 @click.option("-w", "--write", is_flag=True, help="Write keys to files.")
 @click.option("-p", "--psk", is_flag=True, help="Genarate a preshared key as well.")
-def full(
-    wanted_string: str, begining: bool, write: bool, psk: bool, private_key: str | None
-):
+def full(wanted_string: str, begining: bool, write: bool, psk: bool):
     """Generate WireGuard keypair containing specified wanted string."""
 
     key = generate_keys_until_string_is_found(wanted_string, begining)
