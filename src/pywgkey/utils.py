@@ -74,6 +74,16 @@ def generate_keys_until_string_is_found(
     return key
 
 
+def generate_public_key_from_private_key(private_key: str) -> WgKey:
+    """Generate the public key from the given private key.
+
+    :param str private_key: the given private key
+    :return: the keypair
+    :rtype: WgKey
+    """
+    return WgKey(private_key)
+
+
 def __prompt_overwrite(filename: str) -> bool:
     """Prompt if the given file should be overwritten.
 
